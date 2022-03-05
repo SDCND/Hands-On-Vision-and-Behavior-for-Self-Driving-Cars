@@ -1,9 +1,13 @@
 import cv2
-import keras
-from keras.datasets import mnist, cifar10
-from keras.models import load_model
+#import keras
+#from keras.datasets import mnist, cifar10
+#from keras.models import load_model
+import tensorflow.keras
+from tensorflow.keras.datasets import mnist, cifar10
+from tensorflow.keras.models import load_model
 import numpy as np
 import matplotlib.pyplot as plt
+#from tensorflow.keras.utils import to_categorical
 
 batch_size = 16
 num_classes = 10
@@ -15,8 +19,10 @@ x_train = np.reshape(x_train, np.append(x_train.shape, (1)))
 print(x_train.shape)
 x_test = np.reshape(x_test, np.append(x_test.shape, (1)))
 
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
+#y_train = keras.utils.to_categorical(y_train, num_classes)
+#y_test = keras.utils.to_categorical(y_test, num_classes)
+y_train = tensorflow.keras.utils.to_categorical(y_train, num_classes)
+y_test = tensorflow.keras.utils.to_categorical(y_test, num_classes)
 
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
@@ -25,8 +31,10 @@ x_test /= 255
 
 model = load_model("mnist.h5")
 model.summary()
-print("H5 Output: " + str(model.output.op.name))
-print("H5 Input: " + str(model.input.op.name))
+#print("H5 Output: " + str(model.output.op.name))
+#print("H5 Input: " + str(model.input.op.name))
+print("H5 Output: " + str(model.output.name))
+print("H5 Input: " + str(model.input.name))
 
 # Score trained model.
 scores = model.evaluate(x_test, y_test, verbose=1)
