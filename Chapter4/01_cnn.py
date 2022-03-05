@@ -8,7 +8,8 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
 from keras.models import load_model
 from keras.callbacks import ModelCheckpoint
-from keras.optimizers import Adam
+#from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam # - Works
 from keras.losses import categorical_crossentropy
 import os
 from time import time
@@ -18,6 +19,7 @@ import sys
 sys.path.append('../')
 
 from utils import show_history, rgb2gray, bgr2gray, save
+from tensorflow.keras.utils import to_categorical
 
 use_mnist = True
 
@@ -46,9 +48,10 @@ print('X Train', x_train.shape, ' - X Test', x_test.shape)
 print('Y Train', y_train.shape, ' - Y Test', y_test.shape)
 print('First 5 labels, train:', y_train[0], y_train[1], y_train[2], y_train[3], y_train[4])
 print('First 5 labels, test:', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4])
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
-
+#y_train = keras.utils.to_categorical(y_train, num_classes)
+#y_test = keras.utils.to_categorical(y_test, num_classes)
+y_train = to_categorical(y_train, num_classes)
+y_test = to_categorical(y_test, num_classes)
 
 model_name = name + ".h5"
 checkpoint = ModelCheckpoint(model_name, monitor='val_loss', mode='min', verbose=1, save_best_only=True)
