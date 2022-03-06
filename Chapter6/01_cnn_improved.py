@@ -1,12 +1,22 @@
 import cv2
 import keras
-from keras.datasets import mnist, cifar10
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten, BatchNormalization, SpatialDropout2D
-from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
-from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.optimizers import Adam
-from keras.losses import categorical_crossentropy
+#from keras.datasets import mnist, cifar10
+#from keras.models import Sequential
+#from keras.layers import Dense, Dropout, Flatten, BatchNormalization, SpatialDropout2D
+#from keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
+#from keras.callbacks import ModelCheckpoint, EarlyStopping
+#from keras.optimizers import Adam
+#from keras.losses import categorical_crossentropy
+import tensorflow.keras
+from tensorflow.keras.datasets import mnist, cifar10
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout, Flatten, BatchNormalization, SpatialDropout2D
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, AveragePooling2D
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.losses import categorical_crossentropy
+
+
 from time import time
 import numpy as np
 
@@ -14,7 +24,8 @@ import sys
 sys.path.append('../')
 
 from utils import show_history,save
-from keras.preprocessing.image import ImageDataGenerator
+#from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 use_mnist = True
 
@@ -47,8 +58,8 @@ print('X Train', x_train.shape, ' - X Test', x_test.shape)
 print('Y Train', y_train.shape, ' - Y Test', y_test.shape)
 print('First 5 labels, train:', y_train[0], y_train[1], y_train[2], y_train[3], y_train[4])
 print('First 5 labels, test:', y_test[0], y_test[1], y_test[2], y_test[3], y_test[4])
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
+y_train = tensorflow.keras.utils.to_categorical(y_train, num_classes)
+y_test = tensorflow.keras.utils.to_categorical(y_test, num_classes)
 
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')

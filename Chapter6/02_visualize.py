@@ -1,7 +1,7 @@
 import cv2
-import keras
-from keras.datasets import mnist, cifar10
-from keras.models import load_model
+import tensorflow.keras
+from tensorflow.keras.datasets import mnist, cifar10
+from tensorflow.keras.models import load_model
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -21,8 +21,8 @@ if use_mnist:
 else:
     (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
-y_train = keras.utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.to_categorical(y_test, num_classes)
+y_train = tensorflow.keras.utils.to_categorical(y_train, num_classes)
+y_test = tensorflow.keras.utils.to_categorical(y_test, num_classes)
 
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
@@ -30,7 +30,7 @@ x_train /= 255
 x_test /= 255
 
 def display_conv(model, conv_name, num_predictions):
-    from keras import models
+    from tensorflow.keras import models
 
     conv_layer = next(x.output for x in model.layers if x.output.name.startswith(conv_name))
     if conv_layer is not None:
@@ -57,8 +57,10 @@ def display_conv(model, conv_name, num_predictions):
 
 model = load_model(model_name)
 model.summary()
-print("H5 Output: " + str(model.output.op.name))
-print("H5 Input: " + str(model.input.op.name))
+#print("H5 Output: " + str(model.output.op.name))
+#print("H5 Input: " + str(model.input.op.name))
+print("H5 Output: " + str(model.output.name))
+print("H5 Input: " + str(model.input.name))
 
 # Score trained model.
 print ("X Test:", x_test.shape, "Y Test:", y_test.shape)
