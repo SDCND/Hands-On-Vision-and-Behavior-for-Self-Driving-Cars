@@ -3,16 +3,16 @@ import object_detection
 from keras.applications.inception_v3 import InceptionV3, preprocess_input
 from keras.layers import Dense, Flatten, Dropout, GlobalAveragePooling2D, GlobalMaxPooling2D, BatchNormalization
 from keras.models import Model, Sequential
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 import collections
-from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.optimizers import Adam, Adadelta
-from keras.losses import categorical_crossentropy
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from tensorflow.keras.optimizers import Adam, Adadelta
+from tensorflow.keras.losses import categorical_crossentropy
 import sys
 import keras
 import numpy as np
 import tensorflow as tf
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 sys.path.append('../')
 
